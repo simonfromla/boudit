@@ -12,15 +12,28 @@ class ShawtyURLManager(models.Manager):
         qs = super(ShawtyURLManager, self).all(*args, **kwargs).filter(active=True)
         return qs
 
-    def refresh_codes(self):
+    def refresh_codes(self, items=None):
+
         qs = ShawtyURL.objects.filter(id__gte=1)
+
+        print('Management Command Argument Passed: \'{i}\''.format(i=items))
+
+        if items is not None and isinstance(items, int):
+            qs = qs.order_by('-id')[:items]
+        """If items param is passed on management command, then reverse the list of objects, and return up to the 'items' number passed.
+
+        Reverses list in order to return the most recent number of 'items' results
+        """
+
         new_code_count = 0
         for q in qs:
             q.shortcode = create_unique_code(q)
             q.save()
-            print(q.shortcode)
+            print(q.id, q.shortcode)
             new_code_count += 1
+
         return "New codes: {i}".format(i=new_code_count)
+
 
 
 class ShawtyURL(models.Model):
@@ -44,6 +57,10 @@ class ShawtyURL(models.Model):
         super(ShawtyURL, self).save(*args, **kwargs)
 
         # Modifying the default .save() method to also change the shortcode to a randomly generated one
+
+    # Change the ordering directly on the qs, as done on refresh_codes(), or change the default ordering here:
+    # class Meta:
+    #     ordering = '-id'
 
     def __str__(self):
         return str(self.url)
