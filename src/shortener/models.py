@@ -2,17 +2,13 @@ from django.db import models
 import random
 import string
 
+from shortener.utils import generate_shortcode, check_unique_code
 # Create your models here.
 
-def generate_short_on_save(size=7, chars=string.ascii_lowercase + string.digits):
-    new_code = ''
-    for _ in range(size):
-        new_code += random.choice(chars)
-    return new_code
 
 class ShawtyURL(models.Model):
     url = models.CharField(max_length=220)
-    shortcode = models.CharField(max_length=20, unique=True)
+    shortcode = models.CharField(max_length=20, unique=True, blank=True)
     #shortcode = models.CharField(max_length=20, null=True) null=True: Empty in db is OK
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -23,7 +19,8 @@ class ShawtyURL(models.Model):
 
     def save(self, *args, **kwargs):
         #Add changes to default save() method here:
-        self.shortcode = generate_short_on_save()
+        if self.shortcode is None or self.shortcode == '':
+            self.shortcode = check_unique_code(self)
         super(ShawtyURL, self).save(*args, **kwargs)
 
         # Modifying the default .save() method to also change the shortcode to a randomly generated one
