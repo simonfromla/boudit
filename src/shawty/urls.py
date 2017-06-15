@@ -16,6 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from shortener.views import shawty_redirect_view, ShawtyCBView
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^hey/', shawty_redirect_view),
+    url(r'^heyagain/', ShawtyCBView.as_view()),
 ]
