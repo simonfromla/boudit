@@ -20,6 +20,6 @@ from shortener.views import shawty_redirect_view, ShawtyCBView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^hey/', shawty_redirect_view),
-    url(r'^heyagain/', ShawtyCBView.as_view()),
+    url(r'^a/(?P<slug>[\w-]+)', shawty_redirect_view),
+    url(r'^b/(?P<shortcode>[\w-]+)', ShawtyCBView.as_view()),
 ]

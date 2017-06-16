@@ -1,8 +1,10 @@
 from django.db import models
 import random
 import string
-
+from shawty import settings
 from shortener.utils import create_unique_code
+
+SHORTCODE_MAX =getattr(settings, "SHORTCODE_MAX", 15)
 # Create your models here.
 
 class ShawtyURLManager(models.Manager):
@@ -38,7 +40,7 @@ class ShawtyURLManager(models.Manager):
 
 class ShawtyURL(models.Model):
     url = models.CharField(max_length=220)
-    shortcode = models.CharField(max_length=20, unique=True, blank=True)
+    shortcode = models.CharField(max_length=SHORTCODE_MAX, unique=True, blank=True)
     #shortcode = models.CharField(max_length=20, null=True) null=True: Empty in db is OK
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
