@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 
@@ -42,10 +42,10 @@ def shawty_redirect_view(request, slug=None, *args, **kwargs):
     # return HttpResponse('{sc}'.format(sc=obj_url))
 
 
-    # 3. Shortcut method. Good method if a default or alternative action is not desired, and only want 404 page in case of bad request.
+    # 3. Shortcut method. get_object_or_404: good method if a default or alternative action is not desired, and only want 404 page in case of bad request.
     """
     obj = get_object_or_404(ShawtyURL, shortcode=slug)
-    return HttpResponse('{sc}'.format(sc=obj.url))
+    return HttpResponseRedirect(obj.url)
 
 
 
@@ -61,4 +61,4 @@ class ShawtyCBView(View):
     def get(self, request, shortcode=None, *args, **kwargs):
         # obj = ShawtyURL.objects.get(shortcode=shortcode)
         obj = get_object_or_404(ShawtyURL, shortcode=shortcode)
-        return HttpResponse('{sc}'.format(sc=obj.url))
+        return HttpResponseRedirect(obj.url)
