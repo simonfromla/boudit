@@ -1,8 +1,11 @@
 from django.db import models
+from django_hosts.resolvers import reverse
 import random
 import string
 from shawty import settings
 from shortener.utils import create_unique_code
+from .validators import validate_url, validate_dot_com
+
 
 SHORTCODE_MAX =getattr(settings, "SHORTCODE_MAX", 15)
 # Create your models here.
@@ -39,7 +42,7 @@ class ShawtyURLManager(models.Manager):
 
 
 class ShawtyURL(models.Model):
-    url = models.CharField(max_length=220)
+    url = models.CharField(max_length=220, validators=[validate_url, validate_dot_com])
     shortcode = models.CharField(max_length=SHORTCODE_MAX, unique=True, blank=True)
     #shortcode = models.CharField(max_length=20, null=True) null=True: Empty in db is OK
     updated = models.DateTimeField(auto_now=True)
@@ -63,6 +66,14 @@ class ShawtyURL(models.Model):
     # Change the ordering directly on the qs, as done on refresh_codes(), or change the default ordering here:
     # class Meta:
     #     ordering = '-id'
+
+
+
+    # def get_absolute_url(self):
+    #     return "http://www.thawty.com/{shortcode}".format(shortcode=self.shortcode)
+    def get_short_url(self):
+        url_path = reverse('scode', kwargs={'shortcode':self.shortcode}, host='www', scheme='http')
+        return url_path
 
     def __str__(self):
         return str(self.url)

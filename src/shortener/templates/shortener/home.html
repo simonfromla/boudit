@@ -1,0 +1,8 @@
+<div style="width: 200px; margin: auto auto;">
+<h4>{{ title }}</h4>
+    <form method="POST" action=".">{% csrf_token%}
+        <!-- <input name="url" type="text" placeholder="Shorten it"> -->
+        {{form.as_p}}
+        <input type="button" value="Submit">
+    </form>
+</div>

@@ -16,10 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from shortener.views import shawty_redirect_view, ShawtyCBView
+from shortener.views import HomeView, ShawtyCBView #shawty_redirect_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^a/(?P<slug>[\w-]){6,15}$', shawty_redirect_view),
-    url(r'^b/(?P<shortcode>[\w-]){6,15}$', ShawtyCBView.as_view()),
+    # url(r'^a/(?P<slug>[\w-]){6,15}$', shawty_redirect_view),
+    url(r'^$', HomeView.as_view()),
+    url(r'^(?P<shortcode>[\w]+)/$', ShawtyCBView.as_view(), name='scode'),
 ]

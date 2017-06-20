@@ -2,7 +2,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 
+from .forms import URLForm
 from .models import ShawtyURL
+
 
 """Coding 'slug/shortcode=None', because if it's absent, shortcode comes in as a kwarg anyway, due to urls.py using r'^(?P<shortcode>[\w-]+)' regex.
 
@@ -10,7 +12,7 @@ So set the kwarg as an argument, and use the shortcode within the function
 """
 
 
-def shawty_redirect_view(request, slug=None, *args, **kwargs):
+# def shawty_redirect_view(request, slug=None, *args, **kwargs):
     # print(kwargs)
     # print(shortcode)
     # print(request.user) #Also comes with request data
@@ -20,7 +22,7 @@ def shawty_redirect_view(request, slug=None, *args, **kwargs):
     # return HttpResponse('{sc}'.format(sc=obj.url))
 
 
-    """Different ways to either return an existing instance's URL or handle a 'Does Not Exist' error page:
+"""Different ways to either return an existing instance's URL or handle a 'Does Not Exist' error page:
 
     # 1. Put query into try block. When exception is caught, return the first existing object. If slug does not exist, return first object.
 
@@ -43,10 +45,10 @@ def shawty_redirect_view(request, slug=None, *args, **kwargs):
 
 
     # 3. Shortcut method. get_object_or_404: good method if a default or alternative action is not desired, and only want 404 page in case of bad request.
-    """
+
     obj = get_object_or_404(ShawtyURL, shortcode=slug)
     return HttpResponseRedirect(obj.url)
-
+"""
 
 
 """in CBV, explicitly write the HTTP method you want to handle. GET or POST.
@@ -56,6 +58,40 @@ CBV takes a bit more code to write, but is more portable bc explicit.
 
 [description]
 """
+
+
+class HomeView(View):
+    def get(self, request, *args, **kwargs):
+        the_form = URLForm()
+        context = {
+            "title": "URL Shortener",
+            "form": the_form,
+        }
+        return render(request, 'shortener/home.html', context)
+
+    def post(self, request, *args, **kwargs):
+        form_data = URLForm(request.POST)
+        context = {
+            "title": "URL Shortener",
+            "form": form_data,
+        }
+        template = "shortener/home.html"
+        if form_data.is_valid():
+            url = form_data.cleaned_data.get('url')
+            obj, created = ShawtyURL.objects.get_or_create(url=url)
+            context = {
+                "object": obj,
+                "created": created,
+            }
+
+            if created:
+                template = "shortener/success.html"
+            else:
+                template = "shortener/already-exists.html"
+
+        return render(request, template, context)
+
+
 
 class ShawtyCBView(View):
     def get(self, request, shortcode=None, *args, **kwargs):
