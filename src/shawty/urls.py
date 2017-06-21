@@ -22,5 +22,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # url(r'^a/(?P<slug>[\w-]){6,15}$', shawty_redirect_view),
     url(r'^$', HomeView.as_view()),
-    url(r'^(?P<shortcode>[\w]+)/$', ShawtyCBView.as_view(), name='scode'),
+    url(r'^(?P<shortcode>[\w-]+)/$', ShawtyCBView.as_view(), name='scode'),
 ]

@@ -73,6 +73,7 @@ class ShawtyURL(models.Model):
     #     return "http://www.thawty.com/{shortcode}".format(shortcode=self.shortcode)
     def get_short_url(self):
         url_path = reverse('scode', kwargs={'shortcode':self.shortcode}, host='www', scheme='http')
+        print(url_path)
         return url_path
 
     def __str__(self):

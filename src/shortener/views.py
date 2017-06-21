@@ -5,6 +5,8 @@ from django.views import View
 from .forms import URLForm
 from .models import ShawtyURL
 
+from analytics.models import ClickEvent
+
 
 """Coding 'slug/shortcode=None', because if it's absent, shortcode comes in as a kwarg anyway, due to urls.py using r'^(?P<shortcode>[\w-]+)' regex.
 
@@ -93,8 +95,23 @@ class HomeView(View):
 
 
 
+# class ShawtyCBView(View):
+#     def get(self, request, shortcode=None, *args, **kwargs):
+#         # obj = ShawtyURL.objects.get(shortcode=shortcode)
+#         obj = get_object_or_404(ShawtyURL, shortcode=shortcode)
+#         print(obj.url)
+#         return HttpResponseRedirect(obj.url)
+
+
 class ShawtyCBView(View):
     def get(self, request, shortcode=None, *args, **kwargs):
-        # obj = ShawtyURL.objects.get(shortcode=shortcode)
-        obj = get_object_or_404(ShawtyURL, shortcode=shortcode)
+        qs = ShawtyURL.objects.filter(shortcode__iexact=shortcode)
+        if qs.count() != 1 and not qs.exists():
+            raise Http404
+        obj = qs.first()
+        print(ClickEvent.objects.create_event(obj))
+        print('hey')
+        print(obj.url)
+        print(str(HttpResponseRedirect(obj.url)))
+
         return HttpResponseRedirect(obj.url)
