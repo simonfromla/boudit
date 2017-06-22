@@ -65,17 +65,21 @@ CBV takes a bit more code to write, but is more portable bc explicit.
 class HomeView(View):
     def get(self, request, *args, **kwargs):
         the_form = URLForm()
+        bg_image = 'https://images4.alphacoders.com/198/198248.jpg'
         context = {
-            "title": "URL Shortener",
+            "title": "URL Shawty",
             "form": the_form,
+            "bg_image": bg_image,
         }
         return render(request, 'shortener/home.html', context)
 
     def post(self, request, *args, **kwargs):
         form_data = URLForm(request.POST)
+        bg_image = 'https://images4.alphacoders.com/198/198248.jpg'
         context = {
-            "title": "URL Shortener",
+            "title": "URL Shawty",
             "form": form_data,
+            "bg_image": bg_image,
         }
         template = "shortener/home.html"
         if form_data.is_valid():

@@ -4,11 +4,16 @@ from django.core.validators import URLValidator
 
 def validate_url(value):
     url_validator = URLValidator()
+    reg_val = value
+    if "http" in reg_val:
+        new_value = reg_val
+    else:
+        new_value = "http://" + value
     try:
-        url_validator(value)
+        url_validator(new_value)
     except:
         raise ValidationError("Invalid URL for this field")
-    return value
+    return new_value
 
     # url_validator = URLValidator()
     # value_1_invalid = False

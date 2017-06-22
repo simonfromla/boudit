@@ -1,12 +1,29 @@
 {% extends 'base.html' %}
+
+{% block style %}
+<style type="text/css">
+    body {
+        background-size: cover;
+        background-image: url({{bg_image}})
+        /*{% if bg_image %}background-image: url({{bg_image}});{% endif %}*/
+        }
+    .btn-link {
+        text-shadow: none;
+        }
+
+</style>
+
+{% endblock style %}
 {% block content %}
 
     <h3 class="cover-heading">{{ title }}</h3>
+        <p class="lead">Feed me links</p>
+
         <div class="col-sm-6 col-sm-offset-3">
         <form method="POST" action=".">{% csrf_token%}
               <!-- <input name="url" type="text" placeholder="Shorten it"> -->
             {{form.as_p}}
-            <input class="btn btn-default" type="button" value="Submit">
+            <input class="btn btn-default" type="submit" value="Shorten &raquo;">
         </form>
     </div>
 </div>

@@ -59,9 +59,14 @@ class ShawtyURL(models.Model):
         #Add changes to default save() method here:
         if self.shortcode is None or self.shortcode == '':
             self.shortcode = create_unique_code(self)
-        super(ShawtyURL, self).save(*args, **kwargs)
 
+
+        if not "http" in self.url:
+            self.url = "http://" + self.url
+        super(ShawtyURL, self).save(*args, **kwargs)
         # Modifying the default .save() method to also change the shortcode to a randomly generated one
+
+
 
     # Change the ordering directly on the qs, as done on refresh_codes(), or change the default ordering here:
     # class Meta:
