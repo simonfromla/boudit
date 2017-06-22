@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"re",
+				"refresh_codes\tfunction"
+			],
+			[
+				"cre",
+				"create_unique_code\tfunction"
+			],
+			[
+				"ra",
+				"random"
+			],
+			[
+				"Date",
+				"DateTimeField\tclass"
+			],
+			[
+				"date",
+				"DateTimeField\tclass"
+			],
+			[
+				"max",
+				"max_length"
+			],
+			[
 				"admi",
 				"admin\tmodule"
 			],
@@ -216,10 +240,6 @@
 				"pagination_class\tstatement"
 			],
 			[
-				"max",
-				"max_limit\tstatement"
-			],
-			[
 				"Page",
 				"PageNumberPagination\tclass"
 			],
@@ -290,10 +310,6 @@
 			[
 				"Em",
 				"EMAIL_HOST_USER"
-			],
-			[
-				"cre",
-				"created"
 			],
 			[
 				"bg",
@@ -498,22 +514,6 @@
 			[
 				"tran",
 				"transform"
-			],
-			[
-				"cur",
-				"cursor"
-			],
-			[
-				"add",
-				"addClass"
-			],
-			[
-				"box-d",
-				"box-shadow"
-			],
-			[
-				"shad",
-				"text-shadow"
 			]
 		]
 	},
@@ -743,10 +743,22 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/sjung/Documents/django/django1-10"
+		"/Users/sjung/Documents/django/django1-10",
+		"/Users/sjung/Documents/django/django1-10/src",
+		"/Users/sjung/Documents/django/django1-10/src/shawty",
+		"/Users/sjung/Documents/django/django1-10/src/shortener",
+		"/Users/sjung/Documents/django/django1-10/src/shortener/management/commands"
 	],
 	"file_history":
 	[
+		"/Users/sjung/Documents/django/django1-10/src/shortener/utils.py",
+		"/Users/sjung/Documents/django/django1-10/src/shortener/management/commands/refreshcodes.py",
+		"/Users/sjung/Documents/django/django1-10/src/shortener/models.py",
+		"/Users/sjung/Documents/django/django1-10/__init__.py",
+		"/Users/sjung/Documents/django/django1-10/src/shortener/management/__init__.py",
+		"/Users/sjung/Documents/django/django1-10/src/shortener/management/commands/__init__.py",
+		"/Users/sjung/Documents/django/django1-10/src/shortener/admin.py",
+		"/Users/sjung/Documents/django/django1-10/src/shawty/settings.py",
 		"/Users/sjung/Desktop/django110/src/shortener/admin.py",
 		"/Users/sjung/Desktop/django110/src/shawty/settings.py",
 		"/Users/sjung/Desktop/django110/src/shortener/models.py",
@@ -866,15 +878,7 @@
 		"/Users/sjung/Desktop/deletethis.txt",
 		"/Users/sjung/Desktop/newfile.txt",
 		"/Users/sjung/Documents/django/mysite/personal/templates/personal/header.html",
-		"/Users/sjung/Documents/django/mysite/personal/templates/personal/basic.html",
-		"/Users/sjung/Documents/django/mysite/blog/templates/blog/post.html",
-		"/Users/sjung/Documents/django/mysite/blog/templates/blog/blog.html",
-		"/Users/sjung/Desktop/cs80-final-Project/personal-website/about-page.html",
-		"/Users/sjung/Desktop/createTable.php",
-		"/Users/sjung/Desktop/comicsPara/index.html",
-		"/Users/sjung/Desktop/comicsPara/functions.js",
-		"/Users/sjung/Desktop/cs80-final-Project/personal-website/animate.css",
-		"/Users/sjung/Documents/django/djangogirls/.gitignore"
+		"/Users/sjung/Documents/django/mysite/personal/templates/personal/basic.html"
 	],
 	"find":
 	{
