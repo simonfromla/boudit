@@ -67,7 +67,7 @@ class HomeView(View):
         the_form = URLForm()
         bg_image = 'https://images4.alphacoders.com/198/198248.jpg'
         context = {
-            "title": "URL Shawty",
+            "title": "URL Shortener",
             "form": the_form,
             "bg_image": bg_image,
         }
@@ -77,7 +77,7 @@ class HomeView(View):
         form_data = URLForm(request.POST)
         bg_image = 'https://images4.alphacoders.com/198/198248.jpg'
         context = {
-            "title": "URL Shawty",
+            "title": "URL Shortener",
             "form": form_data,
             "bg_image": bg_image,
         }

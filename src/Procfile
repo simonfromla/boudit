@@ -1,0 +1,1 @@
+web: gunicorn shawty.wsgi --log-file -

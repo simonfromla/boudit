@@ -6,7 +6,7 @@ class URLForm(forms.Form):
         validators=[validate_url,],
         widget= forms.TextInput(
                 attrs={
-                "placeholder": "Your very long url here . . .",
+                "placeholder": ". . .a long URL",
                 "class": "form-control"
                 }
                 )

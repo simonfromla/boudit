@@ -13,14 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 
 from shortener.views import HomeView, ShawtyCBView #shawty_redirect_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    # url(r'^a/(?P<slug>[\w-]){6,15}$', shawty_redirect_view),
     url(r'^$', HomeView.as_view()),
+    # url(r'^messages/', include('django_messages.urls')),
+    # url(r'^a/(?P<slug>[\w-]){6,15}$', shawty_redirect_view),
     url(r'^(?P<shortcode>[\w-]+)/$', ShawtyCBView.as_view(), name='scode'),
 ]
