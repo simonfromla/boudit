@@ -2,17 +2,14 @@
 
 {% block title %} {{ object.shortcode }} {% endblock title %}
 
-
 {% block content %}
 <div>
-<h2><p> Already exists </p></h2>
+<h2>Already exists</h2>
     <p>{{ object.url }}</p>
     {% if object.clickevent %}
         <p>Count: {{ object.clickevent.count }}</p>
     {% endif %}
     <p><a class="btn btn-link" href="{{object.get_short_url}}">{{object.get_short_url}}</a></p>
     <a class="btn btn-primary" href="/">New</a>
-
 </div>
-
 {% endblock content %}
