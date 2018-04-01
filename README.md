@@ -1,4 +1,4 @@
 # boudit
 A URL Shortening tool made with Django v1.11
 
-Head over to [boudit.com](boudit.com) to see it in action
+Head over to [www.boudit.com](www.boudit.com) to see it in action
